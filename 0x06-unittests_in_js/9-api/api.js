@@ -3,17 +3,16 @@ const express = require('express');
 const app = express();
 const port = 7865;
 
-app.get('/', (_, res) => {
-  res.statusCode = 200;
-  res.setHeader('Content-Type', 'text/plain');
-  res.send('Welcome to the payment system');
+app.get('/', (request, response) => {
+  response.send('Welcome to the payment system');
 });
 
-app.get('/cart/:id([0-9]+)', (req, res) => {
-  console.log(`${req.params.id}`)
-  res.end(`Payment methods for cart ${req.params.id}`);
-})
+app.get('/cart/:id([0-9]+)', (request, response) => {
+    response.send(`Payment methods for cart ${request.params.id}`);
+});
 
-app.listen(port, console.log(`API available on localhost port ${port}`));
+app.listen(port, () => {
+    console.log(`API available on localhost port ${port}`);
+});
 
-module.exports = [app, port];
+module.exports = app;
